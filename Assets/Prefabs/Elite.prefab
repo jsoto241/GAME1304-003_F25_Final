@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be08930ca78a174aadc559b744a1331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 50
+  HealthBar: {fileID: 0}
   attackRange: 3
   sightRange: 6
   timeBetweenAttacks: 3

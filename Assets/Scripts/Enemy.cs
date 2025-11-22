@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
+    [SerializeField] private int Health = 100;
+    [SerializeField] private ProgressBar HealthBar;
     [Range(0,50)]  [SerializeField] float attackRange = 5, sightRange = 20, timeBetweenAttacks = 3;
 
     [Range(0, 20)][SerializeField] int power; // The amount of damamge that the enemy does
 
+    private float MaxHealth;
     private NavMeshAgent thisEnemy;
     public Transform playerPos;
 
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
     {
         thisEnemy = GetComponent<NavMeshAgent>();
         playerPos = FindObjectOfType<PlayerHealth>().transform;
+        MaxHealth = Health;
     }
 
     private void Update()
@@ -71,5 +74,34 @@ public class Enemy : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, attackRange);
+    }
+
+    public void OnTakeDamage(int Damage)
+    {
+        Health -= Damage;
+
+        HealthBar.SetProgress(Health / MaxHealth, 3);
+
+        if (Health < 0)
+        {
+            OnDied();
+            thisEnemy.enabled = false;
+        }
+    }
+
+    private void OnDied()
+    {
+        float destoryDelay = UnityEngine.Random.value;
+        Destroy(gameObject, destoryDelay);
+        Destroy(HealthBar.gameObject, destoryDelay);
+    }
+
+    public void SetupHealthBar(Canvas Canvas, Camera Camera)
+    {
+        HealthBar.transform.SetParent(Canvas.transform);
+        if (HealthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
+        {
+            faceCamera.Camera = Camera;
+        }
     }
 }

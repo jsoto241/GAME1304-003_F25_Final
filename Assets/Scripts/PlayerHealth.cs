@@ -8,9 +8,12 @@ public class PlayerHealth : MonoBehaviour
 
     public static bool isDead;
 
+    public HealthBar healthBar;
+
     private void Start()
     {
         currentHealth = startHealth; // Set the current health to be the start health, when the game starts.
+        healthBar.SetMaxHealth(startHealth);
     }
 
     private void Update()
@@ -25,5 +28,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+
+        healthBar.SetHealth(currentHealth);
     }
 }
