@@ -10,6 +10,7 @@ public class TwoDimenAnimControl : MonoBehaviour
     public float acceleration = 2.0f;
     public float deceleration = 2.0f;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class TwoDimenAnimControl : MonoBehaviour
         bool leftPressed = Input.GetKey(KeyCode.A);
         bool rightPressed = Input.GetKey(KeyCode.D);
         bool downPressed = Input.GetKey(KeyCode.S);
+
         
         //Increase velocity for inputs
         if (forwardPressed && velocityZ < 0.5f )
@@ -44,8 +46,10 @@ public class TwoDimenAnimControl : MonoBehaviour
             velocityZ -= Time.deltaTime * acceleration;
         }
 
+
         animator.SetFloat("Velocity Z", velocityZ);
         animator.SetFloat("Velocity X", velocityX);
+
 
         //Decrease velocityZ
         if (!forwardPressed && velocityZ > 0.0f)
@@ -76,6 +80,15 @@ public class TwoDimenAnimControl : MonoBehaviour
         if (!leftPressed && !rightPressed && velocityX != 0.0f && (velocityX > -0.05f && velocityX < 0.05f))
         {
             velocityX = 0.0f;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            animator.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("IsAttacking", false);
         }
         
     }
