@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (PlayerHealth.isDead)
         {
-            thisEnemy.isStopped = true;
+            Destroy(gameObject);
         }
 
     }

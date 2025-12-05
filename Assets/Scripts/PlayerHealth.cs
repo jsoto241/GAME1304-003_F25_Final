@@ -21,8 +21,14 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            Debug.Log("The player has died!");
+            PlayerDied();
         }
+    }
+
+    private void PlayerDied()
+    {
+        LevelManager.instance.GameOver();
+        gameObject.SetActive(false);
     }
 
     public void TakeDamage(int amount)
