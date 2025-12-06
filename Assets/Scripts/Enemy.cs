@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void OnDied()
     {
         float destoryDelay = UnityEngine.Random.value;
-        Destroy(gameObject, destoryDelay);
+        gameObject.SetActive(false);
         Destroy(HealthBar.gameObject, destoryDelay);
     }
 

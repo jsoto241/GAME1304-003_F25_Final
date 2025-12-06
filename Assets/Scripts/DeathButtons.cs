@@ -7,7 +7,7 @@ public class DeathButtons : MonoBehaviour
 {
     public void Retry()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Quit()
     {
