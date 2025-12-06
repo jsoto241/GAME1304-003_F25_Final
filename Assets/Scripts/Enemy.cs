@@ -79,6 +79,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public void OnTakeDamage(int Damage)
     {
         Health -= Damage;
+        Debug.Log(Health);
+        
 
         HealthBar.SetProgress(Health / MaxHealth, 3);
 
