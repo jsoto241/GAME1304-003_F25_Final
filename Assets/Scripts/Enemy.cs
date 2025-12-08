@@ -44,10 +44,11 @@ public class Enemy : MonoBehaviour, IDamageable
             StartCoroutine(AttackPlayer()); // Start attacking the player.
         }
 
-        if (PlayerHealth.isDead)
-        {
-            Destroy(gameObject);
-        }
+        //if (PlayerHealth.isDead)
+        //{
+           // Destroy(gameObject);
+               
+       // }
 
     }
 
@@ -84,7 +85,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         HealthBar.SetProgress(Health / MaxHealth, 3);
 
-        if (Health < 0)
+        if (Health <= 0)
         {
             OnDied();
             thisEnemy.enabled = false;

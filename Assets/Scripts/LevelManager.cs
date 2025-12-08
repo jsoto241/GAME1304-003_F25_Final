@@ -8,8 +8,14 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (LevelManager.instance == null) instance = this;
-        else gameObject.SetActive(false);
+        if (LevelManager.instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            gameObject.SetActive(false); 
+        }
     }
 
     public void GameOver()

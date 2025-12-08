@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class DeathButtons : MonoBehaviour
 {
+
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
     public void Quit()
     {
@@ -17,4 +19,6 @@ public class DeathButtons : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+ 
 }

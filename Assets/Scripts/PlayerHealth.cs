@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        isDead = false;
         currentHealth = startHealth; // Set the current health to be the start health, when the game starts.
         healthBar.SetMaxHealth(startHealth);
     }
