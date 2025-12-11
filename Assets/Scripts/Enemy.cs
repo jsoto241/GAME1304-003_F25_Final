@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private float MaxHealth;
     private NavMeshAgent thisEnemy;
     public Transform playerPos;
+    public areOpponentsDead winState;
 
     private bool isAttacking; // if enemy is currently attacking
 
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
         thisEnemy = GetComponent<NavMeshAgent>();
         playerPos = FindObjectOfType<PlayerHealth>().transform;
         MaxHealth = Health;
+        gameObject.tag = "Enemy";
     }
 
     private void Update()
@@ -36,19 +38,20 @@ public class Enemy : MonoBehaviour, IDamageable
             StopAllCoroutines();
 
             ChasePlayer();
-        }
-
-        if (distanceFromPlayer <= attackRange && !isAttacking && !PlayerHealth.isDead)
-        {
+        } else if (distanceFromPlayer <= attackRange && !isAttacking && !PlayerHealth.isDead) {
             thisEnemy.isStopped = true; // Stop the enemy from moving
             StartCoroutine(AttackPlayer()); // Start attacking the player.
         }
+        else if (PlayerHealth.isDead){
+            OnDied();
+        }
+
 
         //if (PlayerHealth.isDead)
         //{
-           // Destroy(gameObject);
-               
-       // }
+        // Destroy(gameObject);
+
+        // }
 
     }
 
@@ -97,6 +100,8 @@ public class Enemy : MonoBehaviour, IDamageable
         float destoryDelay = UnityEngine.Random.value;
         gameObject.SetActive(false);
         Destroy(HealthBar.gameObject, destoryDelay);
+        winState.KilledOpponent(HealthBar.gameObject);
+        gameObject.tag = "Untagged";
     }
 
     public void SetupHealthBar(Canvas Canvas, Camera Camera)
